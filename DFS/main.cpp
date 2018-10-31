@@ -1,48 +1,11 @@
 #include <iostream>
 #include <deque>
 #include <stack>
+#include <vector>
 
 #include "dfs.h"
 
 using namespace std;
-
-void showdq(deque <int> g)
-{
-    deque <int> :: iterator it;
-    for (it = g.begin(); it != g.end(); it++)
-        cout << '\t' << *it;
-    cout << '\n';
-}
-
-void f1(stack<int>& s){
-    s.pop();
-    cout<<"f1="<<s.top();
-    cout<<endl;
-
-}
-
-void f2(stack<int>& s){
-    s.pop();
-    cout<<"f2="<<s.top();
-    cout<<endl;
-}
-
-void traverse_DFS(int **graph, int visited[], int vertices, int current_node, int traverse_node){
-    current_node = traverse_node;
-    visited[current_node] = 1;
-    for(int i=0; i<vertices; i++){
-        if(graph[current_node][i]==1){
-            if(visited[i]==0){
-                traverse_node = i;
-                break;
-            }
-        }
-    }
-
-
-
-}
-
 
 //global vars
 
@@ -90,35 +53,46 @@ int main()
     graph[4][1] = 1;
     graph[5][1] = 1;
 
+    //print info
+    cout<<"Vertices = "<<N<<endl;
+    cout<<"Root = "<<root<<endl;
+    cout<<"Graph Connections : "<<endl;
+    for(int i=0; i<vertices; i++){
+        for(int j=0; j<vertices; j++){
+            if(graph[i][j]==1){
+                cout<<i<<"-"<<j<<endl;
+            }
+        }
+    }
+    //print graph
+    cout<<"Graph : "<<endl;
     for(int i=0; i<vertices; i++){
         for(int j=0; j<vertices; j++){
             cout<<graph[i][j];
         }
         cout<<endl;
     }
+    cout<<endl;
 
-    //init stack & visited array
+    //init stack, visited array, and track
     int visited[vertices];
     for(int i=0; i<vertices; i++){
         visited[i] = 0;
     }
     stack<int> s_dfs;
+    vector<int> v_track;
 
     //DFS traverse
-    int current = root;
-    int traverse_node;
-    s_dfs.push(current);
-    for(int i=0; i<vertices; i++){
-        if(graph[current][i]==1){
-            if(visited[i]==0){
-                traverse_node=i;
-                break;
-            }
-        }
+    cout<<"DFS Traversal :"<<endl;
+    traverse_DFS_helper(graph, s_dfs, visited, v_track, vertices, root);
+    //traverse_DFS(graph, s_dfs, visited, v_track, vertices, traverse_node);
+
+    //print track
+    cout<<"DFS Track on 'Bantu Aufa' problem is : ";
+    for(int i=0; i<v_track.size(); i++){
+        cout<<v_track[i]<<" ";
     }
-    cout<<"traverse node "<<traverse_node<<endl;
-    cout<<"before "<<graph[vertices-1][vertices-1]<<endl;
-    traverse_DFS(graph, visited, vertices, current, traverse_node);
-    cout<<"after "<<graph[vertices-1][vertices-1]<<endl;
+    cout<<endl;
+
     return 0;
 }
