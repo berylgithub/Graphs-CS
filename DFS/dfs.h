@@ -6,10 +6,12 @@
 #include <stack>
 #include <vector>
 
+extern bool is_cycle;
 
 using namespace std;
-void traverse_DFS(int **graph, stack<int>& s_dfs, int visited[], vector<int>& v_track, int vertices, int current_node);
-void traverse_DFS_helper(int **graph, stack<int>& s_dfs, int visited[], vector<int>& v_track, int vertices, int root);
+void traverse_DFS(int **graph, stack<int>& s_dfs, int visited[], vector<int>& v_track, int vertices, int parent, int current_node,
+                  bool backtrack);
+void traverse_DFS_helper(int **graph, vector<int>& v_track, int vertices, int root);
 
 
 #endif // DFS_H_INCLUDED
