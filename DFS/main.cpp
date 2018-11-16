@@ -20,7 +20,7 @@ int main()
     int N=6;
     int vertices = N;
     int root=0;
-
+    //
     //graph init, graph[x][y] = 0 means x->y is not connected
 //    int graph[vertices][vertices];
 //    for(int i=0; i<vertices; i++){
