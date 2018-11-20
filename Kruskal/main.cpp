@@ -5,12 +5,11 @@
 #include <stdlib.h>
 #include <vector>
 #include <bits/stdc++.h>
-#include "../DFS/dfs.h"
-
+#include <algorithm>
+#include "Kruskal.h"
 
 using namespace std;
 
-bool is_cycle;
 
 void load_graph_from_file(int **graph, string file_name){
     string line;
@@ -28,13 +27,13 @@ void load_graph_from_file(int **graph, string file_name){
             else{
                 stringstream caster(line.substr(4, 2));
                 caster >> weight;
-                //weight = (int)line.substr(4, 2);
             }
             graph[source][destination] = weight;
         }
         myfile.close();
     }
 }
+
 
 
 int main()
@@ -58,39 +57,45 @@ int main()
     load_graph_from_file(graph, "graph.txt");
 
     //print graph
+    cout<<"Default Graph : \n";
     for(int i=0; i<vertices; i++){
         for(int j=0; j<vertices; j++){
             cout<<"source = "<<i<<", dest="<<j<<", weight = "<<graph[i][j]<<endl;
         }
     }
+    cout<<endl;
 
-    vector<vector<int> > v_multi_lines;
+
+
+    //init kruskal final graph, optional (only if the edges are returned back to the graph)
+    int **kruskal_graph;
+    kruskal_graph = new int *[vertices];
+    for(int i = 0; i <vertices; i++)
+        kruskal_graph[i] = new int[vertices];
+
     for(int i=0; i<vertices; i++){
-        //line is a pair of <weight, source, dest>
-        vector<int> line;
         for(int j=0; j<vertices; j++){
-            cout<<graph[i][j]<<" "<<i<<" "<<j<<endl;
-            int arr_pair[3] = {graph[i][j], i, j};
-            line.insert(line.end(), arr_pair, arr_pair + 3);
+            kruskal_graph[i][j] = 0;
         }
-        v_multi_lines.push_back(line);
     }
 
-    cout<<v_multi_lines[0].size();
+    vector<vector<int> >v_kruskal_edges = MST_kruskal(graph, vertices);
+
+    //print final edge vector
+    cout<<"\n==MST edges from Kruskal Algorithm==\n";
+    for(int i=0; i<v_kruskal_edges.size(); i++){
+        cout<<"source="<<v_kruskal_edges[i][1]<<" dest="<<v_kruskal_edges[i][2]<<" weight="<<v_kruskal_edges[i][0]<<endl;
+    }
 
 
-//    cout<<"before sort :\n";
-//    for(int i=0; i<v_multi_lines.size(); i++){
-//        cout<<"s="<<v_multi_lines[i][1]<<", d="<<v_multi_lines[i][2]<<", w="<<v_multi_lines[i][0];
-//        cout<<endl;
+    //print graph
+//    cout<<"Kruskal Graph :\n";
+//    for(int i=0; i<vertices; i++){
+//        for(int j=0; j<vertices; j++){
+//            cout<<"source = "<<i<<", dest="<<j<<", weight = "<<kruskal_graph[i][j]<<endl;
+//        }
 //    }
 
-//    sort(v_multi_lines.begin(), v_multi_lines.end());
-//    cout<<"after sort :\n";
-//    for(int i=0; i<v_multi_lines.size(); i++){
-//        cout<<"s="<<v_multi_lines[i][1]<<", d="<<v_multi_lines[i][2]<<", w="<<v_multi_lines[i][0];
-//        cout<<endl;
-//    }
 
     return 0;
 }
