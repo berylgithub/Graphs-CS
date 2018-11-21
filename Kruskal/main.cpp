@@ -88,14 +88,79 @@ int main()
     }
 
 
-    //print graph
-//    cout<<"Kruskal Graph :\n";
-//    for(int i=0; i<vertices; i++){
-//        for(int j=0; j<vertices; j++){
-//            cout<<"source = "<<i<<", dest="<<j<<", weight = "<<kruskal_graph[i][j]<<endl;
-//        }
-//    }
+    cout<<endl<<endl;
+    /////////////////////////////////////////////
+    //Graph No.1
+    cout<<"------Graph No.1---------\n";
+    load_graph_from_file(graph, "graph1.txt");
 
+    //print graph
+    cout<<"Default Graph : \n";
+    for(int i=0; i<vertices; i++){
+        for(int j=0; j<vertices; j++){
+            cout<<"source = "<<i<<", dest="<<j<<", weight = "<<graph[i][j]<<endl;
+        }
+    }
+    cout<<endl;
+
+    v_kruskal_edges.clear();
+    v_kruskal_edges = MST_kruskal(graph, vertices);
+
+    //print final edge vector
+    cout<<"\n==MST edges from Kruskal Algorithm==\n";
+    for(int i=0; i<v_kruskal_edges.size(); i++){
+        cout<<"source="<<v_kruskal_edges[i][1]<<" dest="<<v_kruskal_edges[i][2]<<" weight="<<v_kruskal_edges[i][0]<<endl;
+    }
+
+
+    cout<<endl<<endl;
+    ////////////////////////////////////////////
+    //Graph No.2
+    cout<<"------Graph No.2---------\n";
+    load_graph_from_file(graph, "graph2.txt");
+
+    //print graph
+    cout<<"Default Graph : \n";
+    for(int i=0; i<vertices; i++){
+        for(int j=0; j<vertices; j++){
+            cout<<"source = "<<i<<", dest="<<j<<", weight = "<<graph[i][j]<<endl;
+        }
+    }
+    cout<<endl;
+
+    v_kruskal_edges.clear();
+    v_kruskal_edges = MST_kruskal(graph, vertices);
+
+    //print final edge vector
+    cout<<"\n==MST edges from Kruskal Algorithm==\n";
+    for(int i=0; i<v_kruskal_edges.size(); i++){
+        cout<<"source="<<v_kruskal_edges[i][1]<<" dest="<<v_kruskal_edges[i][2]<<" weight="<<v_kruskal_edges[i][0]<<endl;
+    }
+
+
+    cout<<endl<<endl;
+    ////////////////////////////////////////////
+    //Graph No.3
+    cout<<"------Graph No.3---------\n";
+    load_graph_from_file(graph, "graph3.txt");
+
+    //print graph
+    cout<<"Default Graph : \n";
+    for(int i=0; i<vertices; i++){
+        for(int j=0; j<vertices; j++){
+            cout<<"source = "<<i<<", dest="<<j<<", weight = "<<graph[i][j]<<endl;
+        }
+    }
+    cout<<endl;
+
+    v_kruskal_edges.clear();
+    v_kruskal_edges = MST_kruskal(graph, vertices);
+
+    //print final edge vector
+    cout<<"\n==MST edges from Kruskal Algorithm==\n";
+    for(int i=0; i<v_kruskal_edges.size(); i++){
+        cout<<"source="<<v_kruskal_edges[i][1]<<" dest="<<v_kruskal_edges[i][2]<<" weight="<<v_kruskal_edges[i][0]<<endl;
+    }
 
     return 0;
 }
