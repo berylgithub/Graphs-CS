@@ -4,8 +4,8 @@
 #include <sstream>
 #include <stdlib.h>
 #include <vector>
-#include <map>
 #include <algorithm>
+#include "Prim.h"
 
 using namespace std;
 
@@ -32,24 +32,7 @@ void load_graph_from_file(int **graph, string file_name){
     }
 }
 
-int sum_visited(int visited[], int vertices){
-    int sum=0;
-    for(int i=0; i<vertices; i++){
-        if(visited[i]==1){
-            sum++;
-        }
-    }
-    return sum;
 
-}
-
-
-void MST_prim(int **graph){
-
-
-
-
-}
 
 int main()
 {
@@ -68,79 +51,64 @@ int main()
         }
     }
 
+    ////////////////////////////////
+    //Default Graph
+    cout<<"====Default Graph====\n";
     //load graph
     load_graph_from_file(graph, "graph.txt");
 
-    //init visited array
-    int visited[vertices];
-    for(int i=0; i<vertices; i++){
-        visited[i]=0;
+    vector<vector<int> > v_multi_edges = MST_prim(graph, vertices);
+
+    //print the final edge vectors
+    cout<<"MST edges : \n";
+    for(int i=0; i<v_multi_edges.size(); i++){
+        cout<<"source="<<v_multi_edges[i][1]<<" destination="<<v_multi_edges[i][2]<<" weight="<<v_multi_edges[i][0]<<endl;
+    }
+
+    cout<<endl<<endl;
+    //////////////////////////////////
+    cout<<"====Graph No.1====\n";
+    //Graph No. 1
+    //load graph
+    load_graph_from_file(graph, "graph1.txt");
+    v_multi_edges.clear();
+    v_multi_edges = MST_prim(graph, vertices);
+
+    //print the final edge vectors
+    cout<<"MST edges : \n";
+    for(int i=0; i<v_multi_edges.size(); i++){
+        cout<<"source="<<v_multi_edges[i][1]<<" destination="<<v_multi_edges[i][2]<<" weight="<<v_multi_edges[i][0]<<endl;
     }
 
 
-    //do prim algorithm
-    //start with arbitrary node
-    int start_node = 0;
-    vector<int> v_visited_node;
-    vector<vector<int> > v_multi_neighbors;
-    vector<vector<int> > v_multi_edges;
-    //do prim until all of the vertices are visited (minimum spanning tree)
-    //int x=0;
-    //while(x<=1){
-    while(sum_visited(visited, vertices)<=vertices){
-        //if the vector is empty, add starting node & its neighbors
-        if(v_visited_node.empty()){
-            visited[start_node] = 1;
-            v_visited_node.push_back(start_node);
-            for(int i=0; i<vertices; i++){
-                if(graph[start_node][i]>=1){
-                    vector<int> v_neighbor;
-                    v_neighbor.push_back(graph[start_node][i]);
-                    v_neighbor.push_back(start_node);
-                    v_neighbor.push_back(i);
-                    v_multi_neighbors.push_back(v_neighbor);
-                }
-            }
-            sort(v_multi_neighbors.begin(), v_multi_neighbors.end());
-            //push only the destination at index 2 & delete the edge from neighbor vector
-            visited[v_multi_neighbors[0][2]] = 1;
-            v_visited_node.push_back(v_multi_neighbors[0][2]);
-            v_multi_neighbors.erase(v_multi_neighbors.begin() + 0);
-        }
-        else{
-            //for each visited node, push their neighbors, we must also remove duplicates ((w,s,d) -> (w,d,s))
-            for(int i=0; i<v_visited_node.size(); i++){
-                for(int j=0; j<vertices; j++){
-                    if(graph[i][j]>=1){
-                        vector<int> v_neighbor;
-//                        bool s_found = find(v_multi_groups[j].begin(), v_multi_groups[j].end(), source) != v_multi_groups[j].end();
-//                        bool d_found = find(v_multi_groups[j].begin(), v_multi_groups[j].end(), dest) != v_multi_groups[j].end();
-//                        if(graph[])
-                        v_neighbor.push_back(graph[i][j]);
-                        v_neighbor.push_back(i);
-                        v_neighbor.push_back(j);
-                        v_multi_neighbors.push_back(v_neighbor);
-                    }
-                }
-            }
-            sort(v_multi_neighbors.begin(), v_multi_neighbors.end());
-            //visited[]
+    cout<<endl<<endl;
+    //////////////////////////////////
+    //Graph No. 2
+    cout<<"====Graph No.2====\n";
+    //load graph
+    load_graph_from_file(graph, "graph2.txt");
+    v_multi_edges.clear();
+    v_multi_edges = MST_prim(graph, vertices);
 
-        }
-
-
-
-
-        //x++;
-
+    //print the final edge vectors
+    cout<<"MST edges : \n";
+    for(int i=0; i<v_multi_edges.size(); i++){
+        cout<<"source="<<v_multi_edges[i][1]<<" destination="<<v_multi_edges[i][2]<<" weight="<<v_multi_edges[i][0]<<endl;
     }
 
-    for(int i=0; i<v_multi_neighbors.size(); i++){
-        for(int j=0; j<v_multi_neighbors[i].size(); j++){
-            cout<<v_multi_neighbors[i][j]<<" ";
-        }
-        cout<<"--";
-    }
+    cout<<endl<<endl;
+    //////////////////////////////////
+    //Graph No. 3
+    cout<<"====Graph No.3====\n";
+    //load graph
+    load_graph_from_file(graph, "graph3.txt");
+    v_multi_edges.clear();
+    v_multi_edges = MST_prim(graph, vertices);
 
+    //print the final edge vectors
+    cout<<"MST edges : \n";
+    for(int i=0; i<v_multi_edges.size(); i++){
+        cout<<"source="<<v_multi_edges[i][1]<<" destination="<<v_multi_edges[i][2]<<" weight="<<v_multi_edges[i][0]<<endl;
+    }
     return 0;
 }
