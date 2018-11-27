@@ -2,4 +2,4 @@
 Compilation of basic graph Algorithms (DFS, BFS, prim, kruskal, etc).
 
 ---
-Will be updated soon...
+Almost all of the tasks have been completed, only the puzzles left to solve
