@@ -81,24 +81,24 @@ if __name__ == "__main__":
     
     #example 2 :
     graph={1:[2,3], 2:[3,4], 3:[4,5], 4:[], 5:[]}
-    v_topsort = topsort_helper(graph, 1, log=False)
+    v_topsort = topsort_helper(graph, 1)
     print("\nexample 2, topological sort result = ",v_topsort,"\n")
     
     #example 3 :
     graph={0:[1,3], 1:[2,3], 2:[3,4,5], 3:[4,5], 4:[5], 5:[]}
-    v_topsort = topsort_helper(graph, 5, log=False)
+    v_topsort = topsort_helper(graph, 5)
     print("\nexample 3, topological sort result = ",v_topsort,"\n")
     
     #example 4 :
     graph={"A":["B","C"], "B":["D"], "C":["D"], "D":["E"], "E":[]}
     v_topsort = topsort_helper(graph, "A")
-    print("\nexample 3, topological sort result = ",v_topsort,"\n")
+    print("\nexample 4, topological sort result = ",v_topsort,"\n")
     
     #example 5 :
     graph={"A":["B","F"], "B":["H"], "C":[], 
            "D":["C","I","E","H"], "E":["I"], "F":[], 
            "G":["A","B","C"], "H":[], "I":["C"], 
            "J":["E"]}
-    v_topsort = topsort_helper(graph, "A", log=False)
-    print("\nexample 3, topological sort result = ",v_topsort,"\n")
+    v_topsort = topsort_helper(graph, "A")
+    print("\nexample 5, topological sort result = ",v_topsort,"\n")
     
